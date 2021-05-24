@@ -25,6 +25,7 @@ module.exports = (ctx) => {
     parser: ctx.options.parser,
     plugins: {
       'postcss-import': {root: ctx.file.dirname},
+      'postcss-discard-comments': {removeAll: true},
       'postcss-prefixer': {
         prefix,
         ignore: [/\[class\*=.*\]/],
@@ -38,9 +39,10 @@ module.exports = (ctx) => {
         },
       },
       cssnano: ctx.env === 'production' || ctx.env === 'compat' ? {} : false,
-      'postcss-header': {
+      // Header is not required, since CSS is copied
+      /*'postcss-header': {
         header,
-      },
+      },*/
     },
   };
 };
